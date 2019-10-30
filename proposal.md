@@ -55,7 +55,7 @@ We intend to study crime patterns in Seattle and see if there is a correlation b
 * Individual Goals
   * Bradley: Developing skills in R data manipulation, visualizing data, and communicating the problem. Role will change depending on the task at hand.
   * Allessandra: Explore the impact of data visualizations on real world problems.
-  * Ash: To learn how to apply and interact with datasets to solve real world problems.
+  * Ash: To learn how to apply and interact with datasets to solve real world problems. We plan on dividing roles on a much smaller scale as we move through the problem, so we'll each do a little of everything.
 * We intend communicate over Microsoft Teams. We do also have a group chat on top of our weekly meetings.
 * If we do hit a roadblock with communication and work division, we plan to talk through it calmly since we all, at the end of the day, have the same end goal in mind.
 
