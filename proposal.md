@@ -20,7 +20,7 @@ We want to analyze the frequency of crime in big cities, as it relates to weathe
 
 #### 1.2 What is the Problem
 
-We will explore the weather patterns of major cities in the United States and the crime rates that occur within those cities. Our question is: Does weather affect the amount of crime that happens in a city?
+We will explore the weather patterns of major cities in the United States and the crime rates that occur within those cities. As a society we always want crime rates to fall within our city. Therefore, we want to analyze contributions to the rise and fall of crime rates. Our question is: Does weather affect the amount of crime that happens in a city?
 
 
 #### 1.3 What does it matter?
@@ -39,15 +39,19 @@ We intend to study crime patterns in Seattle and see if there is a correlation b
 
 ### 3.0 Possible Data Sets
 
-* The first data set that we will be using to study this is from the NOAA that outlines precipitation, temperature, snowfall, and other weather conditions over a period of one year in Seattle.
-* The second data set that we will be using is from the Seattle Police Department (published on the City of Seattle’s data portal) that documents the crimes reported within the city. We will use the data collected over one year.
+* The first data set that we will be using to study this is from the NOAA that outlines precipitation, temperature, snowfall, and other weather conditions over a period of one year in Seattle. 15 attributes, thousands of observations. [Dataset](https://www.ncdc.noaa.gov/cdo-web/datasets)
+* The second data set that we will be using is from the Seattle Police Department (published on the City of Seattle’s data portal) that documents the crimes reported within the city. We will use the data collected over one year. 11 attributes, thousands of observations. [Dataset](https://data.seattle.gov/Public-Safety/Crime-Data/4fs7-3vj5) 
 
 ### 4.0 Information Visualizations
 
+https://scx2.b-cdn.net/gfx/news/2018/2-violentcrime.jpg (Source: Harp) [1]
 
-> Figure 1: Two maps of Seattle demonstrating the crime on a particular day. Each map is a different day with a different weather.
+Figure 1: Typical two-dimensional graph with two lines. One represents the crime rate over time, the other represents the weather for that particular day measured in temperature, precipitation, etc.
 
-> Figure 2: Graph with one line representing the crime rate per day on top of a line representing the weather for that day.
+https://ggwash.org/images/posts/200806-seattlewalkscore.png (Source: GGWASH) [2]
+
+Figure 2: Heat maps of Seattle demonstrating the crime rate on a particular day with a particular weather pattern. The heat map changes as new weather types are selected.
+
 
 ### 5.0 Team Coordination
 
@@ -65,6 +69,10 @@ We intend to study crime patterns in Seattle and see if there is a correlation b
 --
 
 ### 7.0 References
+
+[1] Ryan D. Harp et al, The Influence of Interannual Climate Variability on Regional Violent Crime Rates in the United States, GeoHealth (2018). https://phys.org/news/2018-11-violent-crime-warmer-winters.html.
+
+[2] Alpert, David. “WalkScore Heat Maps.” Greater Greater Washington, 13 June 2008, https://ggwash.org/view/498/walkscore-heat-maps.
 
 Crime Reports in Seattle per day - [Dataset](https://data.seattle.gov/Public-Safety/Crime-Data/4fs7-3vj5)
 
