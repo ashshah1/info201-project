@@ -76,4 +76,4 @@ Figure 2: Heat maps of Seattle demonstrating the crime rate on a particular day 
 
 Crime Reports in Seattle per day - [Dataset](https://data.seattle.gov/Public-Safety/Crime-Data/4fs7-3vj5)
 
-Weather Statistics per day at a certain location tags in the Seattle Area - [Dataset](https://www.ncdc.noaa.gov/cdo-web/datasets)
+Weather Statistics per day at a certain location tags in the Seattle Area - [Dataset](datasets/Weather_Data.csv)
