@@ -39,8 +39,8 @@ We intend to study crime patterns in Seattle and see if there is a correlation b
 
 ### 3.0 Possible Data Sets
 
-* The first data set that we will be using to study this is from the NOAA that outlines precipitation, temperature, snowfall, and other weather conditions over a period of one year in Seattle. 15 attributes, thousands of observations. [Dataset](https://www.ncdc.noaa.gov/cdo-web/datasets)
-* The second data set that we will be using is from the Seattle Police Department (published on the City of Seattle’s data portal) that documents the crimes reported within the city. We will use the data collected over one year. 11 attributes, thousands of observations. [Dataset](https://data.seattle.gov/Public-Safety/Crime-Data/4fs7-3vj5) 
+* The first data set that we will be using to study this is from the NOAA that outlines precipitation, temperature, snowfall, and other weather conditions over a period of one year in Seattle. 15 attributes, thousands of observations. [Dataset](datasets/Weather_Data.csv)
+* The second data set that we will be using is from the Seattle Police Department (published on the City of Seattle’s data portal) that documents the crimes reported within the city. We will use the data collected over one year. 11 attributes, thousands of observations. [Dataset](https://data.seattle.gov/Public-Safety/Crime-Data/4fs7-3vj5)
 
 ### 4.0 Information Visualizations
 
