@@ -23,20 +23,16 @@ background <- tabPanel(
   )
 )
 
-visualize <- tabPanel(
-  "Visualizations",
+visualize_one <- tabPanel(
+  "Weather and Crime Map",
   fluidRow(
-    column(5,
-      navlistPanel(
-        tabPanel("Heat Map"),
-        tabPanel("Graph")
-      )
-    ),
     column(4,
+      h2("What this means"),
+      p("explanation of the visualization...")
+    ),
+    column(5,
       h2("Visualization One"),
-      textOutput("city"),
-      textOutput("weather"),
-      textOutput("temperature")
+      textOutput("date")
     ),
     column(3,
       radioButtons(
@@ -47,15 +43,48 @@ visualize <- tabPanel(
       radioButtons(
         inputId = "weather",
         label = "Type of Weather",
-        choices = c("All Types", "Rain", "Sun", "Wind", "Snow")
+        choices = c("None", "Rain", "Thunder", "Wind", "Snow")
       ),
       sliderInput(
         inputId = "temperature",
-        label = "Select Temperature",
+        label = paste("Select the Max Temperature (only applies when ",
+                      "\"None\" is selected)"),
         min = -10,
         max = 110,
-        value = c(50,70)
+        value = 60
       )
+    )
+  )
+)
+
+visualize_two <- tabPanel(
+  "Correlations",
+  fluidRow(
+    column(4,
+           h2("What this means"),
+           p("explanation of the visualization...")
+    ),
+    column(5,
+           h2("Visualization Two"),
+           p("This is a visualization where the temperature is represented",
+             "by a line and the crime rate is also represented by a line",
+             "(plotted on a two-dimensional graph). Toggling the city will",
+             "give you a new city's data and toggling the month will show",
+             "the information for that specific time frame.")
+    ),
+    column(3,
+           radioButtons(
+             inputId = "city",
+             label = "Select a City",
+             choices = c("Seattle", "Denver", "Chicago", "Austin", "Boston")
+           ),
+           selectInput(
+             inputId = "months",
+             label = "Select a month",
+             choices = c("January", "February", "March", "April", "May",
+                         "June", "July", "August", "September", "October",
+                         "November", "December")
+           )
     )
   )
 )
@@ -85,7 +114,8 @@ about_us <- tabPanel(
 my_ui <- navbarPage(theme = shinytheme("superhero"),
   "Skyfall",
   background,
-  visualize,
+  visualize_one,
+  visualize_two,
   conclusion,
   tech,
   about_us
