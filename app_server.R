@@ -8,4 +8,5 @@ my_server <- function(input, output) {
   output$temperature <- renderText(paste("The temp range is: ",
                                          input$temperature[[1]], " to ",
                                          input$temperature[[2]]))
+  
 }

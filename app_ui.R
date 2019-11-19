@@ -1,6 +1,7 @@
 # the UI for the shiny app
 
 library("shiny")
+library("shinythemes")
 
 background <- tabPanel(
   "Background",
@@ -25,13 +26,13 @@ background <- tabPanel(
 visualize <- tabPanel(
   "Visualizations",
   fluidRow(
-    column(4,
+    column(5,
       navlistPanel(
         tabPanel("Heat Map"),
         tabPanel("Graph")
       )
     ),
-    column(5,
+    column(4,
       h2("Visualization One"),
       textOutput("city"),
       textOutput("weather"),
@@ -81,7 +82,7 @@ about_us <- tabPanel(
   p("Allesandra did this and this and this...")
 )
 
-my_ui <- navbarPage(
+my_ui <- navbarPage(theme = shinytheme("superhero"),
   "Skyfall",
   background,
   visualize,
