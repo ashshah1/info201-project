@@ -79,23 +79,32 @@ write.csv(denver_crime, file = "datasets/denver_crime.csv")
 # Cleaning up the Boston dataset. 
 
 # Import .csv file of raw data. 
-boston_data_raw <- read.csv("datasets/boston_crime.csv", stringsAsFactors = FALSE)
+boston_data_raw <- read.csv("boston.csv", stringsAsFactors = FALSE)
 
 # Select 5 columns. 
 boston_new <- boston_data_raw %>%
   select(INCIDENT_NUMBER, Long, Lat, OCCURRED_ON_DATE, OFFENSE_DESCRIPTION) %>% 
-  rename(ID = "INCIDENT_NUMBER", Date = "OCCURRED_ON_DATE",
-         Offense_Type = "OFFENSE_DESCRIPTION", Latitude = "Lat", Longitude = "Long")
-
-# Format new 'Date' column and filter for 2018 data. 
-boston_df_new <- boston_new %>% 
-  mutate(full_date = Date) %>%
-  separate(Date, c("month", "date", "year")) %>% 
+  rename(ID = INCIDENT_NUMBER, Date = OCCURRED_ON_DATE,
+         Offense_Type = OFFENSE_DESCRIPTION, Latitude = Lat, Longitude = Long) %>% 
+  mutate(full_date = Date) %>% 
+  separate(Date, c("year", "month", "d")) %>% 
   filter(year == "2018") %>% 
-  select(full_date, Offense_Type, Longitude, Latitude, ID) %>% 
-  mutate(Date = as.Date(full_date, format = "%m/%d/%Y")) %>%
+  mutate(Date = substr(full_date, 0, 10)) %>% 
   select(Date, Offense_Type, Longitude, Latitude, ID)
 
+write.csv(boston_new, file = "datasets/boston_crime_2.csv")
+  
+
+# Format new 'Date' column and filter for 2018 data. 
+
+# boston_df_new <- boston_new %>% 
+#   mutate(full_date = Date) %>%
+#   separate(Date, c("month", "date", "year")) %>% 
+#   filter(year == "2018") %>% 
+#   select(full_date, Offense_Type, Longitude, Latitude, ID) %>% 
+#   mutate(Date = as.Date(full_date, format = "%m/%d/%Y")) %>%
+#   select(Date, Offense_Type, Longitude, Latitude, ID)
+# 
 
 # Cleaning up the Chicago dataset. 
 
@@ -118,3 +127,12 @@ boston_df_new <- boston_new %>%
   select(Date, Offense_Type, Longitude, Latitude, ID)
 
 # Cleaning Seattle dataset. 
+
+# seattle_crime_raw <- read.csv("Crime_Data.csv", stringsAsFactors = FALSE)
+# 
+# seattle_crime <- seattle_crime_raw %>% 
+#   mutate(occurred_on = Occurred.Date) %>% 
+#   separate(occurred_on, c("month", "day", "year")) %>% 
+#   filter(year == "2018") %>% 
+#   select(Report.Number, Occurred.Date, Crime.Subcategory)
+
