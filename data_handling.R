@@ -40,10 +40,15 @@ weather_data <- function(city, weather, temp){
 }
 
 
-# Cleaning up the Austin crime dataset
+# Dataset Aggregation of Austin, Denver, Boston, Chicago, Seattle crime raw 
+# datasets into 5 columns (ID, Date, Offense_Type, Longitude, Latitude) for 2018. 
 
+# Cleaning up the Austin crime dataset. 
+
+# Import .csv file of raw data. 
 austin_crime_raw <- read.csv("austin.csv", stringsAsFactors = FALSE) 
 
+# Filter data set and create new formatted 'Date' column. 
 austin_crime <- austin_crime_raw %>% 
   mutate(Date = format(as.Date(Occurred.Date, "%m/%d/%Y"))) %>% 
   select(Highest.Offense.Description, Incident.Number, Longitude, 
@@ -53,10 +58,11 @@ austin_crime <- austin_crime_raw %>%
 write.csv(austin_crime, file = "datasets/austin_crime.csv")
 
 
-# Cleaning up the Denver dataset
-
+# Cleaning up the Denver dataset. 
+# Import .csv file of raw data. 
 denver_crime_raw <- read.csv("denver.csv", stringsAsFactors = FALSE)
 
+# Filter data for 2018 and format new 'Date' column. 
 denver_crime <- denver_crime_raw %>% 
   mutate(occurred_on = FIRST_OCCURRENCE_DATE) %>% 
   separate(FIRST_OCCURRENCE_DATE, c("m", "d", "year")) %>% 
@@ -69,3 +75,46 @@ denver_crime <- denver_crime_raw %>%
 
 write.csv(denver_crime, file = "datasets/denver_crime.csv")
 
+
+# Cleaning up the Boston dataset. 
+
+# Import .csv file of raw data. 
+boston_data_raw <- read.csv("datasets/boston_crime.csv", stringsAsFactors = FALSE)
+
+# Select 5 columns. 
+boston_new <- boston_data_raw %>%
+  select(INCIDENT_NUMBER, Long, Lat, OCCURRED_ON_DATE, OFFENSE_DESCRIPTION) %>% 
+  rename(ID = "INCIDENT_NUMBER", Date = "OCCURRED_ON_DATE",
+         Offense_Type = "OFFENSE_DESCRIPTION", Latitude = "Lat", Longitude = "Long")
+
+# Format new 'Date' column and filter for 2018 data. 
+boston_df_new <- boston_new %>% 
+  mutate(full_date = Date) %>%
+  separate(Date, c("month", "date", "year")) %>% 
+  filter(year == "2018") %>% 
+  select(full_date, Offense_Type, Longitude, Latitude, ID) %>% 
+  mutate(Date = as.Date(full_date, format = "%m/%d/%Y")) %>%
+  select(Date, Offense_Type, Longitude, Latitude, ID)
+
+
+# Cleaning up the Chicago dataset. 
+
+# Read .csv file of raw data. 
+boston_data_raw <- read.csv("datasets/chicago_crime.csv", stringsAsFactors = FALSE)
+
+# Select 5 columns. 
+boston_new <- boston_data_raw %>%
+  select(INCIDENT_NUMBER, Long, Lat, OCCURRED_ON_DATE, OFFENSE_DESCRIPTION) %>% 
+  rename(ID = "INCIDENT_NUMBER", Date = "OCCURRED_ON_DATE",
+         Offense_Type = "OFFENSE_DESCRIPTION", Latitude = "Lat", Longitude = "Long")
+
+# Filter data for 2018 and format a new 'Date' column. 
+boston_df_new <- boston_new %>% 
+  mutate(full_date = Date) %>%
+  separate(Date, c("month", "date", "year")) %>% 
+  filter(year == "2018") %>% 
+  select(full_date, Offense_Type, Longitude, Latitude, ID) %>% 
+  mutate(Date = as.Date(full_date, format = "%m/%d/%Y")) %>%
+  select(Date, Offense_Type, Longitude, Latitude, ID)
+
+# Cleaning Seattle dataset. 
