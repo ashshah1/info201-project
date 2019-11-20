@@ -28,10 +28,15 @@ visualize_one <- tabPanel(
   fluidRow(
     column(4,
       h2("What this means"),
-      p("explanation of the visualization...")
+      p("This map shows the chosen city and its geographical location. ",
+        "In addition, the type of weather is selected (or a temperature). ",
+        "Once the user toggles the preferences, a map showing infringements",
+        "in the location is shown. The number of markers indicates how much ",
+        "crime occurred under those conditions.")
     ),
     column(5,
-      h2("Visualization One"),
+      h2("Crime Hot Spots"),
+      leafletOutput("leaf_map"),
       textOutput("date")
     ),
     column(3,
@@ -62,28 +67,26 @@ visualize_two <- tabPanel(
   fluidRow(
     column(4,
            h2("What this means"),
-           p("explanation of the visualization...")
+           p("This visualization shows the average temperatures for each",
+             "month from the chosen city. We will then show the number of",
+             "crime infringements for each month depending on the chosen",
+             "crime type. Any correlation between temperature and crime type",
+             "will be evident on this graph.")
     ),
     column(5,
-           h2("Visualization Two"),
-           p("This is a visualization where the temperature is represented",
-             "by a line and the crime rate is also represented by a line",
-             "(plotted on a two-dimensional graph). Toggling the city will",
-             "give you a new city's data and toggling the month will show",
-             "the information for that specific time frame.")
+           h2("Temperature vs Crime"),
+           plotOutput("temp_plot")
     ),
     column(3,
            radioButtons(
-             inputId = "city",
+             inputId = "city_two",
              label = "Select a City",
              choices = c("Seattle", "Denver", "Chicago", "Austin", "Boston")
            ),
            selectInput(
-             inputId = "months",
-             label = "Select a month",
-             choices = c("January", "February", "March", "April", "May",
-                         "June", "July", "August", "September", "October",
-                         "November", "December")
+             inputId = "crime",
+             label = "Select a crime type",
+             choices = c("Assault", "Robbery", "Homicide")
            )
     )
   )
