@@ -1,4 +1,5 @@
 # server for the shiny app
+library("leaflet")
 source("data_handling.R")
 
 my_server <- function(input, output) {

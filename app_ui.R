@@ -2,7 +2,8 @@
 
 library("shiny")
 library("shinythemes")
-
+library("leaflet")
+library("ggplot2")
 background <- tabPanel(
   "Background",
   titlePanel("Project Information"),
@@ -19,7 +20,9 @@ background <- tabPanel(
     h2("Research Questions"),
     p("At what temperature does crime rise and fall?"),
     p("Which types of crimes are most impacted by weather?"),
-    p("Which cities have the largest correlation between weather and crime")
+    p("Which cities have the largest correlation between weather and crime"),
+    h2("Technical Report"), 
+    a(href = "https://github.com/ashshah1/info201-project/wiki/Technical-Report", "click here")
   )
 )
 
@@ -42,7 +45,7 @@ visualize_one <- tabPanel(
       radioButtons(
         inputId = "city",
         label = "Select a City",
-        choices = c("Seattle", "Denver", "Chicago", "Austin", "Boston")
+        choices = c("Denver", "Chicago", "Austin", "Boston")
       ),
       radioButtons(
         inputId = "weather",
@@ -80,7 +83,7 @@ visualize_two <- tabPanel(
            radioButtons(
              inputId = "city_two",
              label = "Select a City",
-             choices = c("Seattle", "Denver", "Chicago", "Austin", "Boston")
+             choices = c("Denver", "Chicago", "Austin", "Boston")
            ),
            selectInput(
              inputId = "crime",

@@ -1,0 +1,12 @@
+name: info201-project
+title: info201-project
+username:
+account: skyfall-weather-and-crime
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1505172
+bundleId: 2606522
+url: https://skyfall-weather-and-crime.shinyapps.io/info201-project/
+when: 1574327079.70157
+asMultiple: FALSE
+asStatic: FALSE
