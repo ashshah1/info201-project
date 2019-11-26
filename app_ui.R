@@ -37,7 +37,6 @@ visualize_one <- tabPanel(
     column(5,
       h2("Crime Hot Spots"),
       leafletOutput("leaf_map"),
-      textOutput("date")
     ),
     column(3,
       radioButtons(
