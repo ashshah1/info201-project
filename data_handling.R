@@ -6,16 +6,16 @@ library("leaflet")
 library("ggplot2")
 library("stringr")
 #------------------------------------------------------------------------------
-# Retrieve dates under the correct conditions of: 
+# Retrieve dates under the correct conditions of:
 # City, Weather type, and the max temperature.
 # Returns string of dates.
-weather_data <- function(city, weather, temp){
+weather_data <- function(city, weather, temp) {
   query <- paste("datasets/WeatherData_", city, ".csv", sep = "")
   weather_raw <- read.csv(query, stringsAsFactors = FALSE)
   weather_raw <- within(weather_raw, rm(WT01, WT02, WT04))
   weather_result <- weather_raw %>%
     filter(!is.na(TMAX) & !is.na(TMIN)) %>%
-    filter(substr(NAME, 1,3) == toupper(substr(city, 1, 3)))
+    filter(substr(NAME, 1, 3) == toupper(substr(city, 1, 3)))
   if (identical(weather, "Rain")) {
     weather_find <- weather_result %>%
       filter(PRCP == max(PRCP, na.rm = TRUE)) %>%
@@ -49,22 +49,23 @@ weather_data <- function(city, weather, temp){
 # specified date.
 crimemap <- function(city, date) {
   if (identical(substr(city, 1, 3), "Sea")) {
-    lng = -122.3321
-    lat = 47.6062
+    lng <- -122.3321
+    lat <- 47.6062
   } else if (identical(substr(city, 1, 3), "Chi")) {
-    lng = -87.6298
-    lat = 41.8781
+    lng <- -87.6298
+    lat <- 41.8781
   } else if (identical(substr(city, 1, 3), "Den")) {
-    lng = -104.9903
-    lat = 39.7392
+    lng <- -104.9903
+    lat <- 39.7392
   } else if (identical(substr(city, 1, 3), "Bos")) {
-    lng = -71.0589
-    lat = 42.3601
+    lng <- -71.0589
+    lat <- 42.3601
   } else if (identical(substr(city, 1, 3), "Aus")) {
-    lng = -97.7431
-    lat = 30.2672
+    lng <- -97.7431
+    lat <- 30.2672
   }
-  crime_data <- read.csv(paste("datasets/", tolower(city), "_crime.csv", sep = ""),
+  crime_data <- read.csv(paste("datasets/", tolower(city), "_crime.csv",
+                               sep = ""),
                          stringsAsFactors = FALSE)
   crime_data <- na.omit(crime_data)
   crime_data <- crime_data %>%
@@ -85,10 +86,10 @@ crimemap <- function(city, date) {
   return(map)
 }
 
-# Returns a plot representing the average temperature each month over a 
+# Returns a plot representing the average temperature each month over a
 # year-long period (2018) of time.
 temp_plot <- function(city, crime) {
-  queryw <- paste("datasets/WeatherData_", city, ".csv", sep = "")
+  queryw <- paste("datasets/WeatherData_", tolower(city), ".csv", sep = "")
   weather_raw <- read.csv(queryw, stringsAsFactors = FALSE)
   weather <- weather_raw %>%
     filter(!is.na(TMAX) & !is.na(TMIN)) %>%
@@ -97,7 +98,7 @@ temp_plot <- function(city, crime) {
     mutate(month_col = months(as.Date(DATE))) %>%
     group_by(month_col) %>%
     summarize(avg_temp = mean(TMAX))
-  plot <- ggplot(data = weather, 
+  plot <- ggplot(data = weather,
                   mapping = aes(x = substr(month_col, 1, 3),
                                 y = avg_temp, group = 1)) +
     geom_point() +
@@ -124,7 +125,7 @@ crime_plot <- function(city, crime) {
       f_two <- "other"
     }
   }
-  queryc <- paste("datasets/", city, "_crime.csv", sep = "")
+  queryc <- paste("datasets/", tolower(city), "_crime.csv", sep = "")
   crime_raw <- read.csv(queryc, stringsAsFactors = FALSE)
   crime <- crime_raw %>%
     filter(str_detect(tolower(Offense_Type), f_one)) %>%
