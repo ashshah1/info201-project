@@ -8,4 +8,5 @@ my_server <- function(input, output) {
                                         input$temperature)))
   
   output$temp_plot <- renderPlot(temp_plot(input$city_two, input$crime))
+  output$crime_plot <- renderPlot(crime_plot(input$city_two, input$crime))
 }

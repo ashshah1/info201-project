@@ -69,15 +69,21 @@ visualize_two <- tabPanel(
   fluidRow(
     column(4,
            h2("What this means"),
-           p("This visualization shows the average temperatures for each",
-             "month from the chosen city. We will then show the number of",
-             "crime infringements for each month depending on the chosen",
-             "crime type. Any correlation between temperature and crime type",
-             "will be evident on this graph.")
+           p("This visualization shows two plots. The first plot represents",
+             "the average temperature in a chosen city in each month",
+             "of the year. Directly below this graph is a plot representing",
+             "the amount of infringements of a certain crime, in a specified",
+             "month in a chosen city."),
+           p(""),
+           p("The user can visually identify the correlation between",
+             "the amount of offenses with temperature increases and ",
+             "decreases. Different crime types may reveal a worse or ",
+             "stronger connection between the two factors.")
     ),
     column(5,
            h2("Temperature vs Crime"),
-           plotOutput("temp_plot")
+           plotOutput("temp_plot"),
+           plotOutput("crime_plot")
     ),
     column(3,
            radioButtons(
@@ -88,7 +94,7 @@ visualize_two <- tabPanel(
            selectInput(
              inputId = "crime",
              label = "Select a crime type",
-             choices = c("Assault", "Robbery", "Homicide")
+             choices = c("Aggravated Assault", "Burglary", "Drug Related")
            )
     )
   )
@@ -101,8 +107,8 @@ conclusion <- tabPanel(
 )
 
 tech <- tabPanel(
-  "The Tech",
-  titlePanel("About the Tech"),
+  "The Data",
+  titlePanel("About the Data"),
   p("Information about the tech that we used...")
 )
 

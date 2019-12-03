@@ -4,7 +4,7 @@ library("dplyr")
 library("tidyr")
 library("leaflet")
 library("ggplot2")
-
+library("stringr")
 #------------------------------------------------------------------------------
 # Retrieve dates under the correct conditions of: 
 # City, Weather type, and the max temperature.
@@ -85,11 +85,11 @@ crimemap <- function(city, date) {
   return(map)
 }
 
-# Returns a plot representing the temperature and specific crime type rates
-# over a year long period (2018).
+# Returns a plot representing the average temperature each month over a 
+# year-long period (2018) of time.
 temp_plot <- function(city, crime) {
-  query <- paste("datasets/WeatherData_", city, ".csv", sep = "")
-  weather_raw <- read.csv(query, stringsAsFactors = FALSE)
+  queryw <- paste("datasets/WeatherData_", city, ".csv", sep = "")
+  weather_raw <- read.csv(queryw, stringsAsFactors = FALSE)
   weather <- weather_raw %>%
     filter(!is.na(TMAX) & !is.na(TMIN)) %>%
     filter(substr(NAME, 1, 3) == toupper(substr(city, 1, 3))) %>%
@@ -97,9 +97,81 @@ temp_plot <- function(city, crime) {
     mutate(month_col = months(as.Date(DATE))) %>%
     group_by(month_col) %>%
     summarize(avg_temp = mean(TMAX))
-  temps <- ggplot(data = weather) +
-    geom_point(mapping = aes(x = substr(month_col, 1, 3), y = avg_temp)) +
+  plot <- ggplot(data = weather, 
+                  mapping = aes(x = substr(month_col, 1, 3),
+                                y = avg_temp, group = 1)) +
+    geom_point() +
+    geom_line() +
     scale_x_discrete(limits = month.abb) +
     labs(x = "Month", y = "Avg Temperature")
-  return(temps)
+  return(plot)
+}
+
+# Returns a plot of the frequency of a crime type in each month of a year
+crime_plot <- function(city, crime) {
+  f_one <- ""
+  f_two <- ""
+  if (identical(crime, "Aggravated Assault")) {
+    if (!identical(city, "Chicago")) {
+      f_one <- "agg"
+    }
+    f_two <- "as"
+  } else if (identical(crime, "Burglary")) {
+    f_two <- "burglary"
+  } else if (identical(crime, "Drug Related")) {
+    f_two <- "drug"
+    if (identical(city, "Chicago")) {
+      f_two <- "other"
+    }
+  }
+  queryc <- paste("datasets/", city, "_crime.csv", sep = "")
+  crime_raw <- read.csv(queryc, stringsAsFactors = FALSE)
+  crime <- crime_raw %>%
+    filter(str_detect(tolower(Offense_Type), f_one)) %>%
+    filter(str_detect(tolower(Offense_Type), f_two)) %>%
+    mutate(month_col = months(as.Date(Date))) %>%
+    group_by(month_col) %>%
+    summarize(count = n())
+  plot <- ggplot(data = crime, mapping = aes(x = substr(month_col, 1, 3),
+                                              y = count, group = 1)) +
+    geom_point() +
+    geom_line() +
+    scale_x_discrete(limits = month.abb) +
+    labs(x = "Month", y = "Crime Count")
+  return(plot)
+}
+
+# Creates a bar chart with the frequency of each crime type at a temperature
+crime_bar <- function(t_min, t_max) {
+  min_min <- t_min[[1]]
+  min_max <- t_max[[2]]
+  max_min <- t_max[[1]]
+  max_max <- t_max[[2]]
+  f_one <- "ass"
+  f_two <- "burg"
+  f_three <- "agg"
+  f_four <- "arson"
+  queryc <- paste("datasets/", "Chicago", "_crime.csv", sep = "")
+  crime_raw <- read.csv(queryc, stringsAsFactors = FALSE)
+  queryw <- paste("datasets/WeatherData_", "Chicago", ".csv", sep = "")
+  weather_raw <- read.csv(queryw, stringsAsFactors = FALSE)
+  weather_days <- weather_raw %>%
+    filter(!is.na(TMAX) & !is.na(TMIN)) %>%
+    filter(TMAX > max_min & TMAX < max_max) %>%
+    filter(TMIN < min_max & TMIN > min_min) %>%
+    select(DATE)
+  weather_date <- weather_days$DATE
+  crime <- crime_raw %>%
+    filter(Date %in% weather_date) %>%
+    filter(str_detect(tolower(Offense_Type), f_one) |
+            str_detect(tolower(Offense_Type), f_two) |
+            str_detect(tolower(Offense_Type), f_three) |
+            str_detect(tolower(Offense_Type), f_four)) %>%
+    group_by(Offense_Type) %>%
+    summarize(count = n())
+  chart <- ggplot(data = crime) +
+    geom_col(mapping = aes(x = Offense_Type, y = count)) +
+    ggtitle("Crime Type Frequency") +
+    xlab("Crime Type") + ylab("Occurences")
+  chart
 }
