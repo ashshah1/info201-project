@@ -89,7 +89,7 @@ crimemap <- function(city, date) {
 # Returns a plot representing the average temperature each month over a
 # year-long period (2018) of time.
 temp_plot <- function(city, crime) {
-  queryw <- paste("datasets/WeatherData_", tolower(city), ".csv", sep = "")
+  queryw <- paste("datasets/WeatherData_", city, ".csv", sep = "")
   weather_raw <- read.csv(queryw, stringsAsFactors = FALSE)
   weather <- weather_raw %>%
     filter(!is.na(TMAX) & !is.na(TMIN)) %>%
