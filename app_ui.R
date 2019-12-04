@@ -18,9 +18,17 @@ background <- tabPanel(
     " The more crime deterrences are understood, the more we can do to",
     " prevent crime from happening."),
     h2("Research Questions"),
-    p("At what temperature does crime rise and fall?"),
-    p("Which types of crimes are most impacted by weather?"),
-    p("Which cities have the largest correlation between weather and crime"),
+    p("We intend to study crime patterns in large cities and see if there
+      is a correlation between crime statistics and weather patterns. 
+      Both crime and weather are broad, umbrella terms encompassing
+      a large array of items, we want to narrow down on these and focus 
+      on specific crimes and their frequencies in harsher weather conditions, 
+      such as storms and heavy snowfall, as opposed to their rates during 
+      other seasons."),
+    p(""),
+    p("1. At what temperature does crime rise and fall?"),
+    p("2. Which types of crimes are most impacted by weather?"),
+    p("3. Which cities have the largest correlation between weather and crime?"),
     h2("Technical Report"),
     a(href =
         "https://github.com/ashshah1/info201-project/wiki/Technical-Report",
@@ -124,6 +132,7 @@ conclusion <- tabPanel(
   tags$img(src = 'chicago-hot.png', height = "50%", width = "50%",
            align = "right"),
   p(""),
+  p("While the difference are less obvious, they still exist."),
   p("For the most part, the heat maps proved to be a good way to analyze
     the data and look at it through a different lens but made it harder
     to draw concrete conclusions and only let us look at correlational data."),
@@ -173,6 +182,7 @@ tech <- tabPanel(
 about_us <- tabPanel(
   "About Us",
   h3("Bradley Wilson"),
+  p("Statistics: Data Science '22"),
   p("In this project I have been working on the shiny app and developing
     visualizations for the project. The hardest part is learning as I go,
     and developing new ways to visualize data. Shiny can be difficult to
@@ -186,6 +196,7 @@ about_us <- tabPanel(
     this project went. Everyone did their fair share and 
     communicated effectively."),
   h3("Ash Shah"),
+  p("Psychology & Intended Informatics '21"),
   p("When we first started this project, I imagined the design and coding 
     itself to be the hardest part. I learned along the way that almost 
     every small step contributes to the final piece and carries with it
@@ -200,6 +211,7 @@ about_us <- tabPanel(
     section only worked if the last part was functional and that comes 
     from learning to work together."),
   h3("Allesandra Quevedo"),
+  p("Intended Informatics HCI '21"),
   p("In this project I have learned that creating data visualizations with 
     R is not as hard as I initially thought. The only part that was the
     most challenging initially, was the data wrangling portion of the 
